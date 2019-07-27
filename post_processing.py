@@ -96,7 +96,7 @@ def video_post_process(opt,video_list,video_dict):
 
 def BSN_post_processing(opt):
     video_dict=getDatasetDict(opt)
-    video_list=video_dict.keys()#[:100]
+    video_list=list(video_dict.keys())#[:100]
     global result_dict
     result_dict=mp.Manager().dict()
     

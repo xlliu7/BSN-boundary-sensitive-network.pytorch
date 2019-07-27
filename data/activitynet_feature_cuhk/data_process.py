@@ -16,7 +16,7 @@ def resizeFeature(inputData,newSize):
     if originalSize==1:
         inputData=np.reshape(inputData,[-1])
         return np.stack([inputData]*newSize)
-    x=numpy.array(range(originalSize))
+    x=numpy.array(list(range(originalSize)))
     f=scipy.interpolate.interp1d(x,inputData,axis=0)
     x_new=[i*float(originalSize-1)/(newSize-1) for i in range(newSize)]
     y_new=f(x_new)
@@ -110,7 +110,7 @@ def poolData(data,videoAnno,num_prop=100,num_bin=1,num_sample_bin=3,pool_type="m
     return video_feature
 
 videoDict=getDatasetDict()
-videoNameList=videoDict.keys()
+videoNameList=list(videoDict.keys())
 random.shuffle(videoNameList)
 col_names=[]
 for i in range(400):
@@ -124,7 +124,7 @@ for videoName in videoNameList:
     
     videoAnno["feature_frame"]=featureFrame
     videoDict[videoName]=videoAnno
-    print numFrame,featureFrame
+    print(numFrame,featureFrame)
     
     videoFeature_mean=poolData(data,videoAnno,num_prop=100,num_bin=1,num_sample_bin=3,pool_type="mean")
     outDf=pd.DataFrame(videoFeature_mean,columns=col_names)

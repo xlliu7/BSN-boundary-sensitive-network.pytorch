@@ -1,5 +1,5 @@
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import numpy as np
 
@@ -7,8 +7,8 @@ API = 'http://ec2-52-11-11-89.us-west-2.compute.amazonaws.com/challenge16/api.py
 
 def get_blocked_videos(api=API):
     api_url = '{}?action=get_blocked'.format(api)
-    req = urllib2.Request(api_url)
-    response = urllib2.urlopen(req)
+    req = urllib.request.Request(api_url)
+    response = urllib.request.urlopen(req)
     return json.loads(response.read())
 
 def interpolated_prec_rec(prec, rec):
@@ -69,7 +69,7 @@ def wrapper_segment_iou(target_segments, candidate_segments):
 
     n, m = candidate_segments.shape[0], target_segments.shape[0]
     tiou = np.empty((n, m))
-    for i in xrange(m):
+    for i in range(m):
         tiou[:, i] = segment_iou(target_segments[i,:], candidate_segments)
 
     return tiou

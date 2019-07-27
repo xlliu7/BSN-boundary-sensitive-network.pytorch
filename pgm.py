@@ -200,7 +200,7 @@ def generateFeature(opt,video_list,video_dict):
 
 def PGM_proposal_generation(opt):
     video_dict= load_json(opt["video_anno"])
-    video_list=video_dict.keys()#[:199]
+    video_list=list(video_dict.keys())#[:199]
     num_videos = len(video_list)
     num_videos_per_thread = num_videos/opt["pgm_thread"]
     processes = []
@@ -220,7 +220,7 @@ def PGM_proposal_generation(opt):
 
 def PGM_feature_generation(opt):
     video_dict=getDatasetDict(opt)
-    video_list=video_dict.keys()
+    video_list=list(video_dict.keys())
     num_videos = len(video_list)
     num_videos_per_thread = num_videos/opt["pgm_thread"]
     processes = []
